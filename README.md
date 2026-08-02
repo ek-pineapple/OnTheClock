@@ -1,6 +1,6 @@
 # On the Clock
 
-**An agent that watches cast and crew shift clocks in real time and flags a labor-compliance violation *before* it happens — not after it's already cost the production money.**
+**An agent that watches cast and crew shift clocks in real time and flags an approaching labor-compliance violation *before* it happens — catching an avoidable cost before it hits the production's budget.**
 
 Built for [Agentic Cinema: The Blockbuster Hackathon](https://agentic-cinema.devpost.com/) — **Grafana track.**
 
@@ -13,12 +13,14 @@ Under SAG-AFTRA's collective bargaining agreement, performers are entitled to sp
 - **Forced call (rest period violation):** a performer must get 12 hours of rest between dismissal and their next call (reducible to 10–11 hours in specific location/day scenarios). Violating this costs a full day's pay, up to **$900–$950 per performer, per violation**. ([SAG-AFTRA: Rest Periods](https://www.sagaftra.org/rest-periods-forced-calls-0))
 - **Meal penalty:** performers must get a meal break within 6 hours of call, and again within 6 hours of returning from the first. Violations start at **$25 for the first half hour** and escalate every 30 minutes. ([SAG-AFTRA: Meal Periods](https://www.sagaftra.org/meal-periods))
 
-This isn't a hypothetical inefficiency — it's a widely-acknowledged blind spot in how productions currently operate:
+These rest and meal-break rules exist for a safety reason, not just a pay-rate reason: they're designed to mitigate fatigue-related risk on set — impaired alertness, coordination, and decision-making, and a higher chance of on-set accidents. This is why the rules are structured as guarantees rather than optional overtime pay. Unions treat them as a live, actively-contested issue, not a settled formality — SAG-AFTRA pushed to raise these exact penalty amounts in its 2023 negotiations, noting they hadn't increased since 1961.
+
+Where the cost actually lands is on the **production's budget**, not the performer — a violation means the performer is owed a payment, which the production would strongly prefer to avoid. This is a widely-acknowledged blind spot in how productions currently operate:
 
 - *"Forced calls are a commonly missed item when budgeting for SAG payroll, and it is a completely avoidable expense through proper scheduling."* — [ABS Payroll & Accounting](https://abspayroll.com/budgeting-sag-aftra-payroll/)
 - *"Meal penalties can quickly add up to thousands of dollars in a given week... without a reliable pulse on set workflow and detailed documentation."* — [Media Services](https://www.mediaservices.com/blog/production-meal-penalties-iatses-new-rules/)
 
-Today, this is tracked manually — a script supervisor or 2nd AD watching a stopwatch, cross-referenced against payroll after the fact. **On the Clock** turns it into a live, monitored system instead.
+Today, this is tracked manually — a script supervisor or 2nd AD watching a stopwatch, cross-referenced against payroll after the fact. **On the Clock** turns it into a live, monitored system instead — a cost-avoidance and compliance tool for the production, built around a safety-motivated rule.
 
 > **Note on data:** All productions, cast members, and schedules used in this project are entirely fictional, generated to reflect realistic industry patterns (budget tiers, shoot lengths, cast sizes) based on publicly available industry statistics. No real production's actual data is used or represented.
 
