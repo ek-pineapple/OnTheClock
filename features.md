@@ -20,6 +20,7 @@
 - 🟡 **Zone variation** — some generated days use Distant/Overnight location logic, not just flat Studio Zone.
 - 🟡 **Background actor volume simulation** — generate a large batch (50-200) background performers for one demo day, to justify the aggregated view.
 - 🟢 **Stunt coordinator edge case** — one person in the dataset with the 9-hour rest threshold instead of 11/12.
+- 🟢 **Stunt performer edge case** — one person with `performer_category: stunt_performer` (distinct from stunt_coordinator) plus a `contract_schedule` field, including at least one deliberately-mismatched record (H-II performer tagged with K-III schedule) to demo the misclassification check.
 - 🟢 **Multi-day continuity** — data spans several consecutive days so the "4th consecutive day" rest exception can actually be demonstrated, not just asserted.
 
 ---
@@ -35,7 +36,8 @@
 - 🟡 **Non-deductible meal (NDB) handling** — don't false-positive on early arrivals within the 15-min NDB window.
 - 🟡 **Grace period (12 min) + extension (30 min) handling** — don't false-positive on legitimate delay mechanisms.
 - 🟡 **Stacking violations** — correctly detect both a forced call AND meal penalty on the same person/day as independent events.
-- 🟡 **Performer-category-specific thresholds** — stunt coordinator's 9-hour rule, background actor's lower penalty rate.
+- 🟡 **Performer-category-specific thresholds** — stunt coordinator's 9-hour rule, background actor's lower penalty rate. Confirm stunt performer's own rest threshold via source-check before hardcoding (do not assume it matches stunt coordinator).
+- 🟢 **Contract-schedule mismatch check** — flag when a `stunt_performer` record is tagged with the coordinator-only `K-III` flat-deal schedule instead of the correct weekly `H-II` — a real, documented misclassification pattern SAG-AFTRA actively pursues. Cheap validation rule, distinct from the clock-based checks.
 - 🟢 **Consecutive-day tracking** — rolling counter enabling the "once every 4th day" exception logic.
 
 ---
