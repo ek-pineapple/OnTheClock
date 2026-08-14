@@ -59,7 +59,8 @@ Producer(s) / Executive Producers
 ### In scope (build this)
 - SAG-AFTRA rest-period rules incl. exceptions: Studio Zone (flat 12h), Distant Location (10h, once per 4 consecutive days), Overnight Location (11h, 2 non-consecutive days/week), weekly rest (56h, reducible to 54h)
 - Meal break rules incl.: 6-hour rolling clock, non-deductible meal (15 min, within 2 hrs of call), 12-min grace period, 30-min "extension" (legit, not a violation)
-- Performer category dimension: `principal | background | stunt_coordinator` — different penalty amounts and (for stunt coordinators) different rest-hour threshold (9h vs 11/12h)
+- Performer category dimension: `principal | background | stunt_coordinator | stunt_performer` — different penalty amounts and (for stunt coordinators) different rest-hour threshold (9h vs 11/12h). Stunt performers are a distinct category from stunt coordinators — separate contract schedule (weekly Schedule H-II vs. coordinator's Flat Deal Schedule K-III), separate department reporting line (stunt dept, outside standard crew hierarchy). Exact rest-hour threshold for stunt performers needs a source-check when this is built (don't assume it matches coordinators).
+- **Bonus compliance check (cheap, distinctive):** contract-schedule mismatch flag — SAG-AFTRA has actively pursued cases of producers misclassifying stunt performers under the coordinator's flat-deal schedule to avoid proper weekly pay/residual terms. A simple validation (`performer_category == stunt_performer` but `contract_schedule == K-III`) flags this — real, well-documented, and cheap to add alongside the clock-based rules.
 - Budget tier dimension: `Theatrical | Low Budget | Ultra Low Budget | Student/Short` — changes penalty dollar amounts via lookup table
 - Zone dimension: `Studio Zone | Distant Location | Overnight Location` — drives which rest-hour exception applies
 - Stacking violations — a person can incur both a forced call AND a meal penalty same day; evaluated independently
@@ -78,7 +79,7 @@ Producer(s) / Executive Producers
 ## 6. Data Model (core fields)
 
 **Person record:**
-- `person_id`, `name` (fictional), `performer_category` (`principal | background | stunt_coordinator`), `contract_type` (`day | weekly`)
+- `person_id`, `name` (fictional), `performer_category` (`principal | background | stunt_coordinator | stunt_performer`), `contract_type` (`day | weekly`), `contract_schedule` (e.g., `H-II | K-III` — used for the stunt-performer misclassification check)
 
 **Shift/day record:**
 - `call_time`, `dismissal_time` (previous day), `zone` (`studio | distant | overnight`), `consecutive_day_count` (for the 4th-day exception), `meal_break_1_start/end`, `meal_break_2_start/end`, `non_deductible_meal_used` (bool)
