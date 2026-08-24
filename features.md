@@ -17,6 +17,7 @@
 - 🔴 **Basic synthetic day generator** — produces one realistic day of shift data for a small principal cast (5-10 people). Get this generating *plausible* numbers before worrying about edge cases.
 - 🔴 **Violation-triggering scenarios** — hand-craft a few days where a violation is *about* to happen (not just random data) — you need this to exist reliably for the demo, not hope random generation produces it.
 - 🟡 **Budget tier variation** — generate data for 2 fictional productions at different budget tiers (Theatrical vs. Low Budget), affecting penalty lookup values.
+- 🟡 **Call sheet PDF parsing** — instead of purely code-generated data, use Gemini document processing to extract structured shift data (names, call times, locations) from a realistic (fictional) call sheet PDF. Replaces part of the synthetic-data-generator work rather than adding to it — a stronger, more grounded demo than an invisible code-only pipeline.
 - 🟡 **Zone variation** — some generated days use Distant/Overnight location logic, not just flat Studio Zone.
 - 🟡 **Background actor volume simulation** — generate a large batch (50-200) background performers for one demo day, to justify the aggregated view.
 - 🟢 **Stunt coordinator edge case** — one person in the dataset with the 9-hour rest threshold instead of 11/12.
@@ -62,6 +63,7 @@
 - 🔴 **Function calling: evaluate rules** — agent runs data through the rule engine (Category 2) and gets a verdict.
 - 🟡 **Forced function calling: always re-check before "all clear"** — guardrail so the agent can't skip the compliance check step.
 - 🟡 **Natural-language alert generation** — agent produces a human-readable summary, not just raw JSON ("Actor X is 20 min from a forced call").
+- 🟢 **Spoken alerts via Gemini TTS** — pipe existing alert text through TTS. Real justification, not novelty: a busy, loud set means people aren't staring at a dashboard — a spoken alert reaches a 2nd AD moving between departments better than another screen. Cheap once text alerts (above) already work.
 - 🟢 **Agreement-upload extraction (stretch feature)** — Gemini document processing extracts candidate rule thresholds from an uploaded PDF, surfaced as an editable confirmation screen, never auto-applied silently.
 
 ---
