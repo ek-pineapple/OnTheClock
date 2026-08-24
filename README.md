@@ -28,11 +28,11 @@ Today, this is tracked manually — a script supervisor or 2nd AD watching a sto
 
 ## How It Works
 
-1. A synthetic data generator simulates a production day: call times, meal breaks, wrap times, per-performer contract type (day vs. weekly).
+1. A synthetic data generator simulates a production day: call times, meal breaks, wrap times, per-performer contract type (day vs. weekly). Where time allows, this is complemented by real call-sheet-style PDF ingestion — Gemini's document processing extracts structured shift data (names, call times, locations) from a realistic (fictional) call sheet, rather than relying solely on an invisible code-generated pipeline.
 2. This shift data is pushed into **Grafana Cloud** as live metrics/logs.
 3. An **ADK-based agent** connects to the **Grafana Cloud MCP server** at runtime, continuously querying live shift data.
 4. The agent evaluates SAG-AFTRA rest-period and meal-break rules per person, per rolling clock — including exceptions (studio zone vs. distant location, 4th-consecutive-day rule, non-deductible meals, grace periods).
-5. When a violation is approaching, the agent fires an alert **before** the threshold is crossed, not after.
+5. When a violation is approaching, the agent fires an alert **before** the threshold is crossed, not after — as text, and optionally as a spoken alert via Gemini TTS, since a busy set means people aren't always watching a screen.
 6. Two role-based views surface this data differently:
    - **Ops view** (2nd AD) — live per-person countdowns, "who's at risk right now"
    - **Executive view** (UPM / Line Producer) — aggregated dollar exposure, daily/weekly penalty risk trend
@@ -45,6 +45,8 @@ Today, this is tracked manually — a script supervisor or 2nd AD watching a sto
 |---|---|
 | Agent framework | Google Agent Development Kit (ADK), Python |
 | Cloud platform | Gemini Enterprise Agent Platform / Google Cloud |
+| Document ingestion | Gemini document processing (call sheet PDF → structured data) |
+| Alerting | Gemini TTS (spoken alerts, optional) |
 | Observability & alerting | Grafana Cloud + Grafana Cloud MCP server |
 | Backend API | FastAPI |
 | Frontend | React + Vite |
