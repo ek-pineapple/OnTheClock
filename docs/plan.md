@@ -2,8 +2,15 @@
 
 **Hackathon:** Agentic Cinema: The Blockbuster Hackathon
 **Track:** Grafana
-**Deadline:** Sep 7, 2026 @ 2:00pm PDT
+**Deadline:** Sep 9, 2026 @ 2:00pm PDT
 **Repo status:** Public, MIT licensed (required for submission)
+
+> ⚠️ **Some rule figures below were superseded once verified against source.**
+> This document records the original vision and remains the reference for
+> scope, framing, and timeline. For any *number* — penalty amounts, rest
+> hours, thresholds — the source of truth is [`core/rulebook.py`](../core/rulebook.py),
+> where each value carries its own `source_url` and confidence grade.
+> [`handoff.md`](handoff.md) §4 lists every correction.
 
 ---
 
@@ -16,7 +23,7 @@
 ## 2. The Problem (sourced)
 
 - SAG-AFTRA rest period violations ("forced calls"): performer entitled to 12-hour rest between dismissal and next call (reducible to 10-11 hrs under specific zone/day conditions). Violation penalty: full day's pay, up to $900 (day performers) / $950 (weekly performers), per person, per violation. [SAG-AFTRA: Rest Periods](https://www.sagaftra.org/rest-periods-forced-calls-0)
-- Meal penalties: first meal break required within 6 hrs of call, second within 6 hrs of returning from first. Violations escalate every 30 min. As of the 2026 agreement: $75/half-hour for principal performers, $15/half-hour for background performers. Reduced flat $25/half-hour rate applies for Student/Short/Ultra Low Budget films. [SAG-AFTRA: Meal Periods](https://www.sagaftra.org/meal-periods)
+- Meal penalties: first meal break required within 6 hrs of call, second within 6 hrs of returning from first. Violations escalate every 30 min on a **cumulative step schedule** — for principals $25 / $35 / $50 / $50 / $75, then $75 for each further half hour; background $7.50 / $10 / $12.50 / $12.50 / $15. Five increments therefore costs a principal **$235**, not 5 × $75. *(Corrected: an earlier draft recorded the 5th-and-beyond tier as if it were a flat rate.)* [SAG-AFTRA: Meal Periods](https://www.sagaftra.org/meal-periods)
 - Rules exist for safety, not just pay — fatigue increases risk of on-set accidents, not just discomfort.
 - Currently tracked manually (2nd AD / script supervisor with a stopwatch), reconciled against payroll after the fact — not monitored live.
 - Industry sources confirm this is a persistent, "commonly missed" cost, and that people are already reaching for basic scheduling alerts (just not agentic ones).
